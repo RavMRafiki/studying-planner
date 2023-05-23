@@ -203,7 +203,7 @@ function setupItems() {
 }
 // ****** END OF LOCAL STORAGE **********
 // ****** CALCULATE **********
-function calculate() {
+function calculate(e) {e.preventDefault();
   const chartsDiv = document.querySelector(".charts");
   chartsDiv.innerHTML = `<div>
             <canvas id="all-sections-pie-chart"></canvas>
