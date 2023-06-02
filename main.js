@@ -148,13 +148,13 @@ function editItem(e) {
   editElement = e.currentTarget.parentElement;
   let editElement2 =
     e.currentTarget.parentElement.parentElement.previousSibling;
-  console.log(editElement2);
   sectionName.value = element.querySelector(".accordion-button").textContent;
   sectionNumber.value =
     editElement.querySelector(".number-of-topics").textContent;
-  sectionColor.value;
+  sectionColor.value =
+    editElement.querySelector(".color-of-topics").textContent;
   editFlag = true;
-  editID = element.firstChild.id;
+  editID = element.dataset.id;
   submitBtn.textContent = "Edit Section";
 }
 // ****** LOCAL STORAGE **********
@@ -175,8 +175,8 @@ function removeFromLocalStorage(id) {
 }
 function editLocalStorage(id, name, number, color) {
   let items = getLocalStorage();
-  items = items.map(function (item) {
-    if (item.id == id) {
+  items = items.map((item) => {
+    if (item.id === id) {
       item.name = name;
       item.number = number;
       item.color = color;
@@ -203,7 +203,8 @@ function setupItems() {
 }
 // ****** END OF LOCAL STORAGE **********
 // ****** CALCULATE **********
-function calculate(e) {e.preventDefault();
+function calculate(e) {
+  e.preventDefault();
   const chartsDiv = document.querySelector(".charts");
   chartsDiv.innerHTML = `<div>
             <canvas id="all-sections-pie-chart"></canvas>
@@ -266,7 +267,6 @@ function calculate(e) {e.preventDefault();
         todayDateObj.setMonth(todayDateObj.getMonth() + 1)
       );
       dataDodanaObj.setDate(1);
-      console.log(dataDodanaObj);
     } else if (
       examDateObj.getFullYear() === dataDodanaObj.getFullYear() &&
       examDateObj.getMonth() === dataDodanaObj.getMonth()
@@ -278,8 +278,6 @@ function calculate(e) {e.preventDefault();
       break;
     } else break;
   }
-  console.log(studyingDays);
-  console.log(studyingMonths);
   generateSecondChart([studyingDays, studyingMonths]);
   dataForThird = generateDataForThirdChart(
     data,
@@ -313,7 +311,6 @@ function generateDataForThirdChart(
   studyingMonths,
   sectionsPerDay
 ) {
-  // data2 = getLocalStorage();
   dataset = [];
   data[1] = data[1].map((a) => {
     return a / sectionsPerDay;
